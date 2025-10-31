@@ -9,19 +9,28 @@ body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubunt
 .toolbar h1 { font-size: 20px; margin: 0; }
 .toolbar button { font-size: 14px; padding: 8px 12px; cursor: pointer; }
 
-/* A4-styled sheet for print */
+/* A4-styled sheet for screen */
 .sheet { width: 210mm; min-height: 297mm; background: #fff; margin: 0 auto; padding: 16mm; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 
-/* Exercises grid */
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12mm; }
-.cell { display: flex; align-items: baseline; gap: 6mm; font-size: 6mm; border-bottom: 1px dashed #aaa; padding-bottom: 2mm; }
+/* Groups: 3 columns × 2 rows; each group is a single vertical column of 8 items */
+.groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12mm; }
+.group { padding: 2mm 4mm; }
+.cells { display: grid; grid-template-columns: 1fr; row-gap: 5mm; }
+
+/* Exercise cell — larger font to occupy the page */
+.cell { display: flex; align-items: baseline; gap: 6mm; font-size: 6.8mm; padding-bottom: 1mm; }
 .expr { white-space: nowrap; }
-.blank { flex: 1 1 auto; border-bottom: 1px solid #000; height: 0; }
+.blank { flex: 1 1 auto; border-bottom: 1px dotted #888; height: 0; }
+
+/* Row separator between the two grid rows */
+.row-sep { grid-column: 1 / -1; border: 0; border-top: 1px solid #bdbdbd; margin: 4mm 0; }
 
 /* Print styles */
 @media print {
     @page { size: A4; margin: 10mm; }
     .no-print { display: none !important; }
-    .sheet { width: auto; min-height: auto; box-shadow: none; padding: 0; margin: 0; }
-    .grid { gap: 8mm; }
+    .sheet { width: auto; min-height: 0; height: calc(297mm - 20mm); box-shadow: none; padding: 0; margin: 0; }
+    .groups { gap: 12mm; align-content: space-between; }
+    .cells { grid-template-rows: repeat(8, 1fr); row-gap: 4mm; }
+    .row-sep { border-top: 1px solid #999; margin: 2mm 0; }
 }

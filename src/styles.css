@@ -1,0 +1,27 @@
+/* Minimal reset */
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", Arial; color: #111; }
+
+/* Layout */
+.container { padding: 16px; }
+.toolbar { display: flex; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.toolbar h1 { font-size: 20px; margin: 0; }
+.toolbar button { font-size: 14px; padding: 8px 12px; cursor: pointer; }
+
+/* A4-styled sheet for print */
+.sheet { width: 210mm; min-height: 297mm; background: #fff; margin: 0 auto; padding: 16mm; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* Exercises grid */
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12mm; }
+.cell { display: flex; align-items: baseline; gap: 6mm; font-size: 6mm; border-bottom: 1px dashed #aaa; padding-bottom: 2mm; }
+.expr { white-space: nowrap; }
+.blank { flex: 1 1 auto; border-bottom: 1px solid #000; height: 0; }
+
+/* Print styles */
+@media print {
+    @page { size: A4; margin: 10mm; }
+    .no-print { display: none !important; }
+    .sheet { width: auto; min-height: auto; box-shadow: none; padding: 0; margin: 0; }
+    .grid { gap: 8mm; }
+}
